@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nucleus Research.Online</title>
+  <!--<link rel="stylesheet" href="css/bootstrap.min.css" />-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/static/style.css" type="text/css" />
+  {% block css %}
+  {% endblock %}
+</head>
+
+<body>
+  <!-- Navbar  -->
+  <nav class=" navbar fixed-top navbar-expand-lg navbar-dark p-md-3">
+    <div class="container">
+      <a class="navbar-brand logreg" href="#">Nucleus Research</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav" style="text-decoration: none; color: white">
+        <div class="mx-auto"></div>
+        <ul class="navbar-nav ">
+     
+      {% if current_user.is_anonymous %}
+          <li class="nav-item logreg">
+            <a class="nav-link text-white" href="/login">Login</a>
+          </li>
+          <li class="nav-item logreg">
+            <a class="nav-link text-white" href="/register">Register</a>
+          </li>
+      {% else %}
+              <li class="nav-item logreg" style="text-decoration: none; color: white"><a style="text-decoration: none; color: white" class="nav-link text-white" href="{{ url_for('user', username=current_user.username) }}">{{ current_user.username }}</a></li>
+
+              <div style="padding: 10px" > Hello!! </div>
+              <li class="nav-item logreg" style="text-decoration: none; color: white"><a style="text-decoration: none; color: white" href="{{ url_for('logout') }}" >Logout</a></li>
+      {% endif %}
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Banner Image  -->
+  <div class="banner-image w-100 vh-100 d-flex justify-content-center align-items-center">
+    <div class="content text-center">
+      <h1 class="text-white">Nucleus Research</h1>
+      <h1 class="text-white">&#x2193;</h1>
+    </div>
+  </div>
+
+  {% block body %}
+
+  {% endblock %}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    var nav = document.querySelector('nav');
+
+    window.addEventListener('scroll', function () {
+      if (window.pageYOffset > 100) {
+        nav.classList.add('bg-dark', 'shadow');
+      } else {
+        nav.classList.remove('bg-dark', 'shadow');
+      }
+    });
+  </script>
+</body>
+
+</html>

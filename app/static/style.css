@@ -1,0 +1,13 @@
+body{
+  font-family: sans-serif;
+  background-image: url(background.jpg);
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+.logreg:hover{
+  background-color: lightblue;
+  color: black;
+}
+.logreg{
+  font-size: 30px;
+}

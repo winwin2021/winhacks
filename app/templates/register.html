@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block css %}
+<link rel="stylesheet" href="/static/regcss.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+{% endblock css %}
+
+
+{% block body %}
+<div class="container" style="margin-top: 6%;">
+  <div class="row">
+    <div class="col-lg-10 col-xl-9 mx-auto">
+      <div class="card card-signin flex-row my-5">
+        <div class="card-img-left d-none d-md-flex">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title text-center">Register</h5>
+          <form class="form-signin" action="" method="post">
+            {{ form.hidden_tag() }}
+
+            <div class="form-label-group">
+              {{form.username(size=32, class="form-control") }}
+              <label for="username">Username</label>
+              {% for error in form.username.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+              {% endfor %}
+            </div>
+
+            <div class="form-label-group">
+              {{ form.email(size=64, class_="form-control", id_="email") }}
+              {% for error in form.username.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+              {% endfor %}
+
+              <label for="email">Email address</label>
+            </div>
+
+
+
+            <div class="form-label-group">
+              {{ form.password(size=32, class_="form-control", id_="password", placeholder_="Password") }}
+              {% for error in form.password.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+              {% endfor %}
+
+
+
+              <label for="password">Password</label>
+            </div>
+
+            <div class="form-label-group">
+              {{ form.password2(size=32, class_="form-control", id_="confirmpassword", placeholder_="Password") }}
+              {% for error in form.password2.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+              {% endfor %}
+
+
+
+              <label for="confirmpassword">Confirm password</label>
+            </div>
+
+            {{ form.submit(class_="btn btn-lg btn-primary btn-block text-uppercase") }}
+            <a class="d-block text-center mt-2 small" href="/login">Sign In</a>
+            <hr class="my-4">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
