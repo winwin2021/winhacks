@@ -1,1 +1,1 @@
-web: flask db upgrade; gunicorn winhacks:app
+web: flask db upgrade; gunicorn health:app
