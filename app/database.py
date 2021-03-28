@@ -137,6 +137,22 @@ class DatabaseManager:
         self.dir = self.path + self.name # new directory
         self.conn = None # connection
 
+    def grab(self, term):
+        try:
+            output = []
+            c = self.conn.cursor()
+            c.execute('SELECT rowid, * FROM instruments')
+            instruments = c.fetchall()
+            for instrument in instruments:
+                if instrument[1] == term or instrument[2] == term:
+                    c.execute(f'SELECT city FROM facilities WHERE fac_name = {instrument[1]}')
+                    city = c.fetchone()
+                    instrument.append(city)
+                    output.append(instrument)
+            return output
+        except Exception as err:
+            mprint(f'Failed to fetch data: {err}')
+
     def build_name(self):
         if not self.name.endswith('.db'):
             self.name += '.db'

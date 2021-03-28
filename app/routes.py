@@ -1,12 +1,16 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 
+from app import database # database py file
+
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from app.forms import LoginForm, RegistrationForm
 from app.models import User 
 from datetime import datetime
-
+
+DB_PATH = 'dbs/' # default database path
+DB_NAME = 'database' # default database file name
 
 @app.route('/')
 @app.route('/index')
@@ -21,16 +25,18 @@ def search():
     if request.method == 'POST':
         searchQuery = request.form.get("form1")
         
-        """TODO"""
+        dbmgr = database.DatabaseManager(DB_PATH, DB_NAME) # new database manager
+        output = dbmgr.grab(searchQuery) # output is a 2d array
     
-        return render_template('search.html', result=result)
+        return render_template('search.html', result=output)
     return render_template('index.html')
 
 
 
 
 
-
+
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
